@@ -27,7 +27,7 @@ class MongooseBackend{
             username: data.username,
             email: data.email,
             password: data.password,
-            uid: data.username + data.password
+            uid: data.uid
         });
         return await item.save();
     }
