@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "678075533080",
+    "project_id": "waste-manager-void-hack",
+    "storage_bucket": "waste-manager-void-hack.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678075533080:android:dafb29a45dfd7fb393406d",
+        "android_client_info": {
+          "package_name": "com.example.waste_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678075533080-26ee61raa9mkn0t93n76gfdeld29lano.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKHOJmRFRnRT5IBrbiS7ez9dfq2D9ZunI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "678075533080-26ee61raa9mkn0t93n76gfdeld29lano.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

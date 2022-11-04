@@ -20,7 +20,6 @@ const GoogleMarkerSchema = mongoose.Schema(
                 time:{
                     type: Date,
                     required: true
-
                 }
 
             }
