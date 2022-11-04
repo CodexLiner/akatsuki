@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/home"
+        android:title="@string/menu_home"
+        android:icon="@drawable/home"
+        app:cnb_iconColor="@color/home" />
+
+    <item android:id="@+id/search"
+        android:title="@string/menu_search"
+        android:icon="@drawable/search"
+        app:cnb_iconColor="@color/search"/>
+
+    <item android:id="@+id/profile"
+        android:title="@string/menu_profile"
+        android:icon="@drawable/person"
+        app:cnb_iconColor="@color/profile"/>
+
+    <item android:id="@+id/settings"
+        android:title="@string/menu_settings"
+        android:icon="@drawable/setting"
+        app:cnb_iconColor="@color/setting"/>
+
+</menu>

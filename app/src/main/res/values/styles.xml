@@ -37,4 +37,11 @@
         <item name="boxStrokeWidth">2dp</item>
         <item name="android:textColorHint">@color/grey</item>
     </style>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/menu_color</item>
+        <item name="colorPrimaryDark">@color/menu_color_dark</item>
+
+    </style>
 </resources>

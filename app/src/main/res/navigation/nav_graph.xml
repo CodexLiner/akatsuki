@@ -9,11 +9,7 @@
         android:id="@+id/loginFragment"
         android:name="com.akatsuki.wastecontroller.UI.fragments.LoginFragment"
         android:label="Login"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_homePageFragment"
-            app:destination="@id/homePageFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_login" />
     <fragment
         android:id="@+id/signupFragment"
         android:name="com.akatsuki.wastecontroller.UI.fragments.SignupFragment"
@@ -35,9 +31,4 @@
             android:id="@+id/action_firstFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/homePageFragment"
-        android:name="com.akatsuki.wastecontroller.UI.fragments.HomePageFragment"
-        android:label="fragment_home_page"
-        tools:layout="@layout/fragment_home_page" />
 </navigation>

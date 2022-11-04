@@ -1,5 +1,6 @@
 package com.akatsuki.wastecontroller.UI.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,8 +11,10 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.akatsuki.wastecontroller.R
+import com.akatsuki.wastecontroller.UI.BottomNavigationActivity
 import com.akatsuki.wastecontroller.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.Dispatchers.Main
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,7 +61,10 @@ class LoginFragment : Fragment() {
         auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {it->
             if (it.isSuccessful) {
                 Toast.makeText(requireContext(), "Successfully LoggedIn", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(R.id.action_loginFragment_to_homePageFragment)
+                activity?.let{
+                    val intent = Intent (it, BottomNavigationActivity::class.java)
+                    it.startActivity(intent)
+                }
             } else
                 Toast.makeText(requireContext(), "Log In failed ", Toast.LENGTH_SHORT).show()
         }
