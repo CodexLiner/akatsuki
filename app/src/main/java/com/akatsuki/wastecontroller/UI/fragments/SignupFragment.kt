@@ -1,11 +1,23 @@
 package com.akatsuki.wastecontroller.UI.fragments
 
+import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.akatsuki.wastecontroller.R
+import com.akatsuki.wastecontroller.UI.Users
+import com.akatsuki.wastecontroller.databinding.FragmentSignupBinding
+import com.akatsuki.wastecontroller.network.AsyncResponse
+import com.akatsuki.wastecontroller.network.BackendCall
+import com.google.firebase.auth.FirebaseAuth
+import org.json.JSONObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,44 +29,113 @@ private const val ARG_PARAM2 = "param2"
  * Use the [SignupFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SignupFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class SignupFragment : Fragment(), AsyncResponse {
+
+    lateinit var etEmail: EditText
+    lateinit var username: EditText
+    lateinit var etConfPass: EditText
+    private lateinit var etPass: EditText
+    private lateinit var btnSignUp: Button
+    var fireStore = FireStore()
+    private var _binding: FragmentSignupBinding? = null
+    private val binding get() = _binding!!
+
+    // create Firebase authentication object
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        auth = FirebaseAuth.getInstance()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_signup, container, false)
+        _binding = FragmentSignupBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SignupFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SignupFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        btnSignUp = binding.signInButton2
+        etEmail = binding.email
+        etConfPass = binding.confirmPassword
+        etPass = binding.password
+        username = binding.username
+        btnSignUp.setOnClickListener {
+            signUpUser()
+        }
     }
+
+    fun signUpUser() {
+        val email = etEmail.text.toString()
+        val pass = etPass.text.toString()
+        val confirmPassword = etConfPass.text.toString()
+
+        // check pass
+        if (email.isBlank() || pass.isBlank() || confirmPassword.isBlank()) {
+            Toast.makeText(requireContext(), "Password and Confirm Password do not match", Toast.LENGTH_SHORT)
+                .show()
+            return
+        }
+        auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {it->
+            if (it.isSuccessful) {
+                Toast.makeText(requireContext(), "Successfully Singed Up", Toast.LENGTH_SHORT).show()
+                var uid = fireStore.uploadUser(
+                    Users(
+                        etEmail.text.toString(),
+                        etPass.text.toString()
+                    )
+                )
+
+                val userInfo = hashMapOf<Any, Any>(
+                    "email" to etEmail.text.toString(),
+                    "password" to etPass.text.toString(),
+                    "username" to username,
+                    "uid" to uid,
+                )
+                var backendCall = BackendCall("http:localhost:5000/user/register", userInfo, "",requireActivity())
+                backendCall.asyncResponse = this
+                backendCall.execute()
+                findNavController().navigate(R.id.action_signupFragment_to_loginFragment)
+            } else {
+                Toast.makeText(requireContext(), "Singed Up Failed!", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    override fun Result(jsonObject: JSONObject?) {
+        Log.d("Signup", jsonObject.toString())
+    }
+
+
+//    fun getMethod() {
+//        val request = Request.Builder()
+//            .url("https://publicobject.com/helloworld.txt")
+//            .build()
+//
+//        client.newCall(request).execute().use { response ->
+//            if (!response.isSuccessful) throw IOException("Unexpected code $response")
+//
+//            for ((name, value) in response.headers) {
+//                println("$name: $value")
+//            }
+//            println(response.body!!.string())
+//        }
+//    }
+//
+//    fun run(userInfo: HashMap<String, Any>) {
+//
+//        val request = Request.Builder()
+//            .url("https://api.github.com/markdown/raw")
+//            .post(userInfo)
+//            .build()
+//
+//        client.newCall(request).execute().use { response ->
+//            if (!response.isSuccessful) throw IOException("Unexpected code $response")
+//
+//            println(response.body!!.string())
+//        }
+//    }
 }
