@@ -2,6 +2,7 @@ package com.akatsuki.wastecontroller.UI
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.akatsuki.wastecontroller.R
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
