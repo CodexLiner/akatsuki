@@ -62,7 +62,8 @@ class MongooseBackend{
         return GoogleMarker.find({});
     }
      async insertGoogleMarker(data) {
-                const item = GoogleMarker({
+     console.log(data)
+                const item = new GoogleMarker({
                     markers: data.markers
                 });
                 return await item.save();

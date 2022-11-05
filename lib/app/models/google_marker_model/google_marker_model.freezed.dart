@@ -22,6 +22,7 @@ GoogleMarkerModel _$GoogleMarkerModelFromJson(Map<String, dynamic> json) {
 mixin _$GoogleMarkerModel {
   double get longitude => throw _privateConstructorUsedError;
   double get latitude => throw _privateConstructorUsedError;
+  DateTime get dateTime => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +37,7 @@ abstract class $GoogleMarkerModelCopyWith<$Res> {
           GoogleMarkerModel value, $Res Function(GoogleMarkerModel) then) =
       _$GoogleMarkerModelCopyWithImpl<$Res, GoogleMarkerModel>;
   @useResult
-  $Res call({double longitude, double latitude, String uid});
+  $Res call({double longitude, double latitude, DateTime dateTime, String uid});
 }
 
 /// @nodoc
@@ -54,6 +55,7 @@ class _$GoogleMarkerModelCopyWithImpl<$Res, $Val extends GoogleMarkerModel>
   $Res call({
     Object? longitude = null,
     Object? latitude = null,
+    Object? dateTime = null,
     Object? uid = null,
   }) {
     return _then(_value.copyWith(
@@ -65,6 +67,10 @@ class _$GoogleMarkerModelCopyWithImpl<$Res, $Val extends GoogleMarkerModel>
           ? _value.latitude
           : latitude // ignore: cast_nullable_to_non_nullable
               as double,
+      dateTime: null == dateTime
+          ? _value.dateTime
+          : dateTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -81,7 +87,7 @@ abstract class _$$_GoogleMarkerModelCopyWith<$Res>
       __$$_GoogleMarkerModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double longitude, double latitude, String uid});
+  $Res call({double longitude, double latitude, DateTime dateTime, String uid});
 }
 
 /// @nodoc
@@ -97,6 +103,7 @@ class __$$_GoogleMarkerModelCopyWithImpl<$Res>
   $Res call({
     Object? longitude = null,
     Object? latitude = null,
+    Object? dateTime = null,
     Object? uid = null,
   }) {
     return _then(_$_GoogleMarkerModel(
@@ -108,6 +115,10 @@ class __$$_GoogleMarkerModelCopyWithImpl<$Res>
           ? _value.latitude
           : latitude // ignore: cast_nullable_to_non_nullable
               as double,
+      dateTime: null == dateTime
+          ? _value.dateTime
+          : dateTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -120,7 +131,10 @@ class __$$_GoogleMarkerModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_GoogleMarkerModel implements _GoogleMarkerModel {
   const _$_GoogleMarkerModel(
-      {required this.longitude, required this.latitude, required this.uid});
+      {required this.longitude,
+      required this.latitude,
+      required this.dateTime,
+      required this.uid});
 
   factory _$_GoogleMarkerModel.fromJson(Map<String, dynamic> json) =>
       _$$_GoogleMarkerModelFromJson(json);
@@ -130,11 +144,13 @@ class _$_GoogleMarkerModel implements _GoogleMarkerModel {
   @override
   final double latitude;
   @override
+  final DateTime dateTime;
+  @override
   final String uid;
 
   @override
   String toString() {
-    return 'GoogleMarkerModel(longitude: $longitude, latitude: $latitude, uid: $uid)';
+    return 'GoogleMarkerModel(longitude: $longitude, latitude: $latitude, dateTime: $dateTime, uid: $uid)';
   }
 
   @override
@@ -146,12 +162,15 @@ class _$_GoogleMarkerModel implements _GoogleMarkerModel {
                 other.longitude == longitude) &&
             (identical(other.latitude, latitude) ||
                 other.latitude == latitude) &&
+            (identical(other.dateTime, dateTime) ||
+                other.dateTime == dateTime) &&
             (identical(other.uid, uid) || other.uid == uid));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, longitude, latitude, uid);
+  int get hashCode =>
+      Object.hash(runtimeType, longitude, latitude, dateTime, uid);
 
   @JsonKey(ignore: true)
   @override
@@ -172,6 +191,7 @@ abstract class _GoogleMarkerModel implements GoogleMarkerModel {
   const factory _GoogleMarkerModel(
       {required final double longitude,
       required final double latitude,
+      required final DateTime dateTime,
       required final String uid}) = _$_GoogleMarkerModel;
 
   factory _GoogleMarkerModel.fromJson(Map<String, dynamic> json) =
@@ -181,6 +201,8 @@ abstract class _GoogleMarkerModel implements GoogleMarkerModel {
   double get longitude;
   @override
   double get latitude;
+  @override
+  DateTime get dateTime;
   @override
   String get uid;
   @override

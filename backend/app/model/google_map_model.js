@@ -17,7 +17,7 @@ const GoogleMarkerSchema = mongoose.Schema(
                     type: String,
                     required: true,
                 },
-                time:{
+                dateTime:{
                     type: Date,
                     default: Date.now
                 }
