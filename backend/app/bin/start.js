@@ -13,12 +13,15 @@ app.use(
         })
 );
 
-mongooseDatabase.launch().then(()=>{
-    app.listen(5000, (req,res) => {
-        console.log("Server started at port 5000");
-    });
-});
+// routes import
+const twiiter_route = require("../routes/twitter")
 
+
+//twiiter route
+app.use("/twitter" , twiiter_route)
+
+
+// registration route
 app.post("/user/register", async (req, res)=> {
 
     const { uid } = req.body;
@@ -34,7 +37,7 @@ app.post("/user/register", async (req, res)=> {
             });
     }
 })
-
+// login route
 app.post("/user/login", async (req, res) => {
     const { uid } = req.body;
     console.log(uid)
@@ -44,4 +47,11 @@ app.post("/user/login", async (req, res) => {
     } else {
         res.send({ status: 'error', error: 'User doesnt exist'})
     }
+});
+
+// starting server
+mongooseDatabase.launch().then(()=>{
+    app.listen(5000, (req,res) => {
+        console.log("Server started at port 5000");
+    });
 });

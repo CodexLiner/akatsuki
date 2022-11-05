@@ -1,5 +1,5 @@
 module.exports = {
     mongodb: {
-        url: 'mongodb://localhost:27017/waste_collector'
+        url: 'mongodb+srv://waste:1234@cluster0.jxdasqv.mongodb.net/test'
     }
 }
