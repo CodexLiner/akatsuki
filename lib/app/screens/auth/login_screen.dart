@@ -8,13 +8,26 @@ import 'package:waste_manager/app/screens/auth/sign_up_screen.dart';
 import '../../data/controllers/user_controller.dart';
 import '../home_screens/home_screen.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final _auth = FirebaseAuth.instance;
 
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    Get.find<UserController>();
+    super.initState();
+  }
+
   final TextEditingController emailController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
 
   @override
@@ -128,8 +141,8 @@ class LoginPage extends StatelessWidget {
                           const Text(
                             "Login",
                             style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w500
+                                fontSize: 30,
+                                fontWeight: FontWeight.w500
                             ),
                           ),
 
@@ -195,7 +208,7 @@ class LoginPage extends StatelessWidget {
                                     ),
                                   ],
                                 );
-                          }),
+                              }),
                           const SizedBox(
                             height: 20,
                           ),

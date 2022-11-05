@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:waste_manager/app/data/api_client/api_client.dart';
 import 'package:waste_manager/app/data/api_client/api_urls.dart';
@@ -10,7 +12,7 @@ class GeneralCollectionRepo extends GetxService{
   GeneralCollectionRepo({required this.apiClient});
 
   postUserCollection(GeneralCollection generalCollection) async {
-    return await apiClient.postData(AppConstant.uploadCollection,generalCollection);
+    return await apiClient.postData(AppConstant.uploadCollection,generalCollection.toJson());
   }
 
   getAllCollection()async{
@@ -18,6 +20,7 @@ class GeneralCollectionRepo extends GetxService{
   }
 
   editCollection(GeneralCollection generalCollection) async {
-    return await apiClient.putData(AppConstant.updateCollection,generalCollection.toJson());
+    log("${AppConstant.updateCollection}/${generalCollection.title}");
+    return await apiClient.putData("${AppConstant.updateCollection}/${generalCollection.title}",generalCollection.toJson());
   }
 }

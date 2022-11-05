@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:waste_manager/app/screens/home_screens/garbage_collector_markers.dart';
 
 import 'general_collection_page.dart';
 
@@ -12,11 +13,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  int selectedPage=2;
+  int selectedPage=0;
   final _screens=[
     const GeneralCollectionPage(),
-    Container(),
-    Container(),
+    const GarbageCollectorMarkers(),
     Container(),
   ];
   @override
@@ -33,9 +33,8 @@ class _HomePageState extends State<HomePage> {
         items: const [
 
           Icon(Icons.chat, size: 30,color: Colors.white),
-          Icon(Icons.list, size: 30,color: Colors.white),
-          Icon(Icons.home_filled, size: 30,color: Colors.white),
-          Icon(Icons.compare_arrows, size: 30,color: Colors.white),
+          Icon(Icons.location_on_outlined, size: 30,color: Colors.white),
+          Icon(Icons.upload, size: 30,color: Colors.white),
         ],
         index: selectedPage,
         onTap: (index) {

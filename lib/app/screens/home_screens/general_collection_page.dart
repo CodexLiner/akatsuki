@@ -33,7 +33,7 @@ class _GeneralCollectionPageState extends State<GeneralCollectionPage> {
   @override
   void initState() {
     Get.find<GeneralCollectionController>();
-    // loadData();
+    loadData();
     super.initState();
   }
 
@@ -49,12 +49,11 @@ class _GeneralCollectionPageState extends State<GeneralCollectionPage> {
 
         return Scaffold(
           body: ListView.builder(
-            // itemCount: generalController.generalCollection.length,
-            itemCount: 2,
+            itemCount: generalController.generalCollection.length,
             shrinkWrap: true,
             itemBuilder: (context, index){
 
-              // final descriptionModelList = generalController.generalCollection[index].descriptionModel;
+              final descriptionModelList = generalController.generalCollection[index].descriptionModel;
               return Container(
                 margin: const EdgeInsets.symmetric( vertical: 10, horizontal: 15),
 
@@ -71,9 +70,8 @@ class _GeneralCollectionPageState extends State<GeneralCollectionPage> {
                           ),
                           color: Colors.blue[300]
                       ),
-                      child: const Text(
-                        // generalController.generalCollection[index].title,
-                        "This is the title",
+                      child: Text(
+                        generalController.generalCollection[index].title,
                         style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 25
@@ -90,35 +88,36 @@ class _GeneralCollectionPageState extends State<GeneralCollectionPage> {
                             color: Colors.blue[200]
                         ),
                         child: ListView.builder(
-                          // itemCount: descriptionModelList.length,
-                          itemCount: 1,
+                          itemCount: descriptionModelList.length,
                           shrinkWrap: true,
                           itemBuilder: (context, index){
-                            return Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
+                            return Container(
+                              padding: EdgeInsets.symmetric( vertical: 5),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
 
-                                Container(
-                                  height: 8,
-                                  width: 8,
-                                  margin: EdgeInsets.only(right: 15, top: 5),
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.black
-                                  ),
-                                ),
-                                Container(
-                                  width: MediaQuery.of(context).size.width/1.5,
-                                  child: Text(
-                                    textAlign: TextAlign.justify,
-                                    // "${descriptionModelList[index].description} (by ${descriptionModelList[index].username})",
-                                    "This is the description and oagbeuob ik sgeif sise fi fai sifa igef sj sfj bdsj iv sjhc vjh vinsd vkaj j hjv ao jksocf aj ocj ks ik aej i",
-                                    style: TextStyle(
-                                      fontSize: 16,
+                                  Container(
+                                    height: 8,
+                                    width: 8,
+                                    margin: EdgeInsets.only(right: 15, top: 5),
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.black
                                     ),
                                   ),
-                                ),
-                              ],
+                                  Container(
+                                    width: MediaQuery.of(context).size.width/1.5,
+                                    child: Text(
+                                      textAlign: TextAlign.justify,
+                                      "${descriptionModelList[index].description} (by ${descriptionModelList[index].username})",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             );
                           },
                         )
@@ -128,10 +127,6 @@ class _GeneralCollectionPageState extends State<GeneralCollectionPage> {
               );
             },
           ),
-          // floatingActionButton: FloatingActionButton(
-          //   onPressed: (){},
-          //   child: Icon(Icons.add),
-          // ),
           floatingActionButton: SpeedDial(
             animatedIcon: AnimatedIcons.menu_close,
             children: [
@@ -182,7 +177,7 @@ class _GeneralCollectionPageState extends State<GeneralCollectionPage> {
                                           description: description,
                                         ),
                                       ]
-                                  )
+                                  ),
                               );
                               loadData();
                             }

@@ -1,11 +1,12 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:waste_manager/app/data/controllers/user_controller.dart';
-import 'package:waste_manager/app/screens/auth/login_screen.dart';
 
 import '../../models/user_model/user_model.dart';
+import '../home_screens/home_screen.dart';
 
 
 
@@ -25,6 +26,12 @@ class _SignInState extends State<SignUpScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+
+  @override
+  void initState() {
+    Get.find<UserController>();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -218,24 +225,23 @@ class _SignInState extends State<SignUpScreen> {
                           return Padding(
                             padding: const EdgeInsets.all(10),
                             child: ElevatedButton(
-                              onPressed: () {
+                              onPressed: () async {
 
                                 if(_formKey.currentState!.validate()){
-                                  _auth
-                                      .createUserWithEmailAndPassword(email: emailController.text, password: confirmPasswordController.text)
-                                      .then((value) async => {
-                                    await userController.postUserInfo(
-                                        UserModel(
-                                            uid: FirebaseAuth.instance.currentUser!.uid,
-                                            user_password: confirmPasswordController.text,
-                                            user_email: emailController.text,
-                                            username: firstNameController.text+secondNameController.text
-                                        )
-                                    ).then((value) => {
-                                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => LoginPage()))
-                                    }),
-                                  }).catchError((e){
-                                    Fluttertoast.showToast(msg: "SignUp successful");
+                                  await _auth.createUserWithEmailAndPassword(
+                                      email: emailController.text,
+                                      password: confirmPasswordController.text
+                                  );
+                                  await userController.postUserInfo(
+                                      UserModel(
+                                          uid: FirebaseAuth.instance.currentUser!.uid,
+                                          user_password: confirmPasswordController.text,
+                                          user_email: emailController.text,
+                                          username: firstNameController.text+secondNameController.text
+                                      )
+                                  ).then((value) => {
+                                    log(value.toString()),
+                                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomePage()))
                                   });
                                 }
                               },

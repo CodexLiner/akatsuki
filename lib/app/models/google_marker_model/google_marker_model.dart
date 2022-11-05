@@ -7,7 +7,6 @@ class GoogleMarkerModel with _$GoogleMarkerModel {
   const factory GoogleMarkerModel({
     required double longitude,
     required double latitude,
-    required DateTime dateTime,
     required String uid
   }) = _GoogleMarkerModel;
 

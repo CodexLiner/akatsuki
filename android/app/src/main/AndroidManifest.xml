@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.waste_manager">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="waste_manager"
         android:name="${applicationName}"
@@ -32,6 +34,6 @@
             android:value="2" />
 
        <meta-data android:name="com.google.android.geo.API_KEY"
-           android:value="AIzaSyA7VayJjaThF-Mlo2dVmOhWxNcCNj0Bkd8"/>
+           android:value="AIzaSyBLeFL7J3tJH3KCmHiovjD2hHDl85ohDvE"/>
     </application>
 </manifest>

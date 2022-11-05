@@ -8,25 +8,25 @@ class GeneralCollectionController extends GetxController{
   final GeneralCollectionRepo generalCollectionRepo;
   GeneralCollectionController({required this.generalCollectionRepo});
 
-
   List<GeneralCollection> generalCollection = [];
 
   Future<void> postCollection(GeneralCollection generalCollection) async {
     await generalCollectionRepo.postUserCollection(generalCollection);
+    update();
   }
 
   Future<void> getAllCollection() async {
-    var response = await generalCollectionRepo.getAllCollection();
-    if(response.statusCode==200){
-      generalCollection = [];
-      response.forEach((element) => {
-        generalCollection.add(GeneralCollection.fromJson(element))
-      });
-      update();
-    }
+    Response response = await generalCollectionRepo.getAllCollection();
+    generalCollection = [];
+    var collection = response.body?? [];
+    collection.forEach((element) => {
+      generalCollection.add(GeneralCollection.fromJson(element))
+    });
+    update();
   }
 
-  void editCollection(GeneralCollection generalCollection) async {
+  Future<void> editCollection(GeneralCollection generalCollection) async {
     await generalCollectionRepo.editCollection(generalCollection);
+    update();
   }
 }

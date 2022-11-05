@@ -14,7 +14,9 @@ class GoogleMarkerController extends GetxController {
 
   Future<void> getAllMarkers() async {
     var response = await googleMarkerRepo.getAllMarkers();
-    response.forEach((marker) => {
+    var markers = response.body;
+    googleMarkers = [];
+    markers.forEach((marker) => {
       googleMarkers.add(GoogleMarkerModel.fromJson(marker))
     });
     update();
@@ -22,8 +24,7 @@ class GoogleMarkerController extends GetxController {
 
   Future<void> putMarker(GoogleMarkerModel googleMarkerModel) async {
     var response = await googleMarkerRepo.putMarkers(googleMarkerModel);
-    if(response) {
-      log("position marked successfully");
-    }
+    update();
   }
+
 }

@@ -5,15 +5,14 @@ const UserSchema = mongoose.Schema(
     {
         uid: {
             type: String,
-            required: true
         },
-        email: {
+        user_email: {
             type: String,
             required: true,
             unique: true,
             trim: true
         },
-        password: {
+        user_password: {
             type: String,
             required: true,
             trim: true

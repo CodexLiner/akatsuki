@@ -6,11 +6,11 @@ const GoogleMarkerSchema = mongoose.Schema(
         markers: [
             {
                 lat: {
-                    type: Location().lat,
+                    type: mongoose.Decimal128,
                     required: true
                 },
                 long: {
-                    type: Location().long,
+                    type: mongoose.Decimal128,
                     required: true
                 },
                 uid:{
@@ -19,7 +19,7 @@ const GoogleMarkerSchema = mongoose.Schema(
                 },
                 time:{
                     type: Date,
-                    required: true
+                    default: Date.now
                 }
 
             }

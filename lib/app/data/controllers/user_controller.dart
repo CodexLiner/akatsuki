@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:get/get.dart';
 
 import '../../models/user_model/user_model.dart';
@@ -8,15 +10,14 @@ class UserController extends GetxController{
   final UserRepo userRepo;
   UserController({required this.userRepo});
 
-  Future<void> postUserInfo(UserModel userModel) async {
-    userRepo.postUserInfo(userModel);
+  postUserInfo(UserModel userModel) async {
+    await userRepo.postUserInfo(userModel);
   }
 
   Future<UserModel?> getUserInfo(String uid)async{
+    log(uid);
     var response = await userRepo.getUserInfo(uid);
-    if(response.statusCode==200){
-      return UserModel.fromJson(response);
-    }
-    return null;
+    log(response.body.toString());
+    return UserModel.fromJson(response.body);
   }
 }

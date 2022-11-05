@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -14,9 +16,10 @@ class _ExistingCollectionDialogBoxState extends State<ExistingCollectionDialogBo
 
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
-  String selectedTitle = '';
+  String? selectedTitle;
   @override
   Widget build(BuildContext context) {
+    log(widget.titleList.toString());
     return Dialog(
       child: SizedBox(
         width: MediaQuery.of(context).size.width/1.4,
@@ -86,7 +89,7 @@ class _ExistingCollectionDialogBoxState extends State<ExistingCollectionDialogBo
                 onPressed: () {
                   if(selectedTitle != '' && descriptionController.text.isNotEmpty){
                     widget.existingCollectionData(
-                      selectedTitle,
+                      selectedTitle!,
                       descriptionController.text,
                     );
                     Navigator.pop(context);

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:waste_manager/app/data/api_client/api_client.dart';
 import 'package:waste_manager/app/data/api_client/api_urls.dart';
@@ -9,10 +11,11 @@ class UserRepo extends GetxService{
   UserRepo({required this.apiClient});
 
   postUserInfo(UserModel userModel) async {
+    log('This is the user: $userModel');
     return await apiClient.postData(AppConstant.userRegister, userModel.toJson());
   }
 
   getUserInfo(String uid) async {
-    return await apiClient.getData(uid);
+    return await apiClient.getUserInfo(uid);
   }
 }
